@@ -15,10 +15,12 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,10 +34,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RecyclerView recyclerView;
     private SocialMediaChannel socialMediaChannel;
     private final List<Official> officialList = new ArrayList<>();
-    private static int MY_LOCATION_REQUEST_CODE_ID = 111;
     private LocationManager locationManager;
     private Criteria criteria;
-    //private Official official;
+    private static int MY_LOCATION_REQUEST_CODE_ID = 111;
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,75 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             officialList.add(official);
         }
         setUpRecyclerView();
-    }
-
-    private void setUpLocation(){
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-        criteria = new Criteria();
-
-        // use gps for location
-        criteria.setPowerRequirement(Criteria.POWER_HIGH);
-        criteria.setAccuracy(Criteria.ACCURACY_FINE);
-
-        // use network for location
-        //criteria.setPowerRequirement(Criteria.POWER_LOW);
-        //criteria.setAccuracy(Criteria.ACCURACY_MEDIUM);
-
-        criteria.setAltitudeRequired(false);
-        criteria.setBearingRequired(false);
-        criteria.setSpeedRequired(false);
-
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(
-                    this,
-                    new String[]{
-                            Manifest.permission.ACCESS_FINE_LOCATION
-                    },
-                    MY_LOCATION_REQUEST_CODE_ID);
-        } else {
-            setLocation();
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(
-            int requestCode, @NonNull
-            String[] permissions, @NonNull
-                    int[] grantResults) {
-
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        if (requestCode == MY_LOCATION_REQUEST_CODE_ID) {
-            if (permissions[0].equals(Manifest.permission.ACCESS_FINE_LOCATION) &&
-                    grantResults[0] == PERMISSION_GRANTED) {
-                setLocation();
-                return;
-            }
-        }
-
-    }
-
-    @SuppressLint("MissingPermission")
-    private void setLocation() {
-
-        String bestProvider = locationManager.getBestProvider(criteria, true);
-        ((TextView) findViewById(R.id.bestText)).setText(bestProvider);
-
-        Location currentLocation = null;
-        if (bestProvider != null) {
-            currentLocation = locationManager.getLastKnownLocation(bestProvider);
-        }
-        if (currentLocation != null) {
-            ((TextView) findViewById(R.id.locText)).setText(
-                    String.format(Locale.getDefault(),
-                            "%.4f, %.4f", currentLocation.getLatitude(), currentLocation.getLongitude()));
-        } else {
-            ((TextView) findViewById(R.id.locText)).setText(R.string.no_locs);
-        }
-
-
+        FindLocation findLocation = new FindLocation(this);
     }
 
     private void setUpRecyclerView(){

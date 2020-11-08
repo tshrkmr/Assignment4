@@ -3,7 +3,9 @@ package edu.depaul.assignment4;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.location.Address;
 import android.location.Criteria;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.util.Log;
@@ -11,6 +13,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import java.io.IOException;
+import java.util.List;
 import java.util.Locale;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
@@ -84,7 +89,7 @@ public class FindLocation extends MainActivity {
         Location currentLocation = null;
         if (bestProvider != null) {
             currentLocation = locationManager.getLastKnownLocation(bestProvider);
-            Log.d(TAG, "setLocation: " + currentLocation);
+            //Log.d(TAG, "setLocation: " + currentLocation);
         }
         if (currentLocation != null) {
 //            ((TextView) findViewById(R.id.locText)).setText(
@@ -93,9 +98,10 @@ public class FindLocation extends MainActivity {
             String location = String.format(Locale.getDefault(),"%.4f, %.4f", currentLocation.getLatitude(), currentLocation.getLongitude());
             Toast.makeText(mainActivity, location, Toast.LENGTH_LONG).show();
             Log.d(TAG, "setLocation: " + location);
+            mainActivity.findPostalCode(currentLocation.getLatitude(), currentLocation.getLongitude());
         } else {
             Log.d(TAG, "setLocation: " + "No Location");
-            Toast.makeText(mainActivity, "No Location", Toast.LENGTH_LONG).show();
+            //Toast.makeText(mainActivity, "No Location", Toast.LENGTH_LONG).show();
         }
     }
 }

@@ -96,8 +96,8 @@ public class FindLocation extends MainActivity {
 //                    String.format(Locale.getDefault(),
 //                            "%.4f, %.4f", currentLocation.getLatitude(), currentLocation.getLongitude()));
             String location = String.format(Locale.getDefault(),"%.4f, %.4f", currentLocation.getLatitude(), currentLocation.getLongitude());
-            Toast.makeText(mainActivity, location, Toast.LENGTH_LONG).show();
-            Log.d(TAG, "setLocation: " + location);
+            //Toast.makeText(mainActivity, location, Toast.LENGTH_LONG).show();
+            //Log.d(TAG, "setLocation: " + location);
             mainActivity.findPostalCode(currentLocation.getLatitude(), currentLocation.getLongitude());
         } else {
             Log.d(TAG, "setLocation: " + "No Location");

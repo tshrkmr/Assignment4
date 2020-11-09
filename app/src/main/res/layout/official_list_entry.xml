@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/officialTitleTextview"
+        android:id="@+id/listTitleTextview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -20,14 +20,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/recycler"
+        android:id="@+id/listNameTextview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:textAlignment="viewEnd"
-        app:layout_constraintEnd_toEndOf="@+id/officialTitleTextview"
-        app:layout_constraintStart_toStartOf="@+id/officialTitleTextview"
-        app:layout_constraintTop_toBottomOf="@+id/officialTitleTextview" />
+        app:layout_constraintEnd_toEndOf="@+id/listTitleTextview"
+        app:layout_constraintStart_toStartOf="@+id/listTitleTextview"
+        app:layout_constraintTop_toBottomOf="@+id/listTitleTextview" />
 
     <ImageView
         android:id="@+id/separatorImageView"
@@ -35,10 +35,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:contentDescription="@string/separator"
-        app:layout_constraintEnd_toEndOf="@+id/officialTitleTextview"
+        app:layout_constraintEnd_toEndOf="@+id/listTitleTextview"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/officialTitleTextview"
-        app:layout_constraintTop_toBottomOf="@+id/recycler"
+        app:layout_constraintStart_toStartOf="@+id/listTitleTextview"
+        app:layout_constraintTop_toBottomOf="@+id/listNameTextview"
         app:srcCompat="@drawable/separator" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

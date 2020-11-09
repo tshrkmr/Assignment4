@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Criteria criteria;
     private static int MY_LOCATION_REQUEST_CODE_ID = 111;
     private static final String TAG = "MainActivity";
+    private int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,19 +54,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setUpRecyclerView(){
-        recyclerView = findViewById(R.id.recycler);
+        recyclerView = findViewById(R.id.listNameTextview);
         officialAdapter = new OfficialAdapter(officialList, this);
         recyclerView.setAdapter(officialAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     public void findPostalCode(double latitude, double longitude){
-        Log.d(TAG, "findPostalCode: " + "1");
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
         try {
             List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
             String postalCode = addresses.get(0).getPostalCode();
-            Log.d(TAG, "findPostalCode: " + "find");
             Toast.makeText(this, postalCode, Toast.LENGTH_SHORT).show();
             Log.d(TAG, "findPostalCode: " + postalCode);
         }catch (IOException e){
@@ -75,7 +74,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-
+        position = recyclerView.getChildLayoutPosition(view);
+        Intent intent = new Intent(this, OfficialActivity.class);
+//        intent.putExtra("title", noteList.get(position).getTitle());
+//        intent.putExtra("content", noteList.get(position).getContent());
+//        startActivityForResult(intent, Request_Code);
+        startActivity(intent);
     }
 
     @Override

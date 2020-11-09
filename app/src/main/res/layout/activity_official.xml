@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.66" />
+
+        <TextView
+            android:id="@+id/postalCodeTextview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/titleTextview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/postalCodeTextview" />
+
+        <TextView
+            android:id="@+id/nameTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/titleTextview"
+            app:layout_constraintStart_toStartOf="@+id/titleTextview"
+            app:layout_constraintTop_toBottomOf="@+id/titleTextview" />
+
+        <TextView
+            android:id="@+id/partyTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/titleTextview"
+            app:layout_constraintStart_toStartOf="@+id/titleTextview"
+            app:layout_constraintTop_toBottomOf="@+id/nameTextView" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="344dp"
+            android:layout_height="316dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:contentDescription="@string/officialimage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/partyTextView"
+            app:srcCompat="@drawable/brokenimage" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="113dp"
+            android:layout_height="78dp"
+            android:contentDescription="@string/partyimage"
+            app:layout_constraintBottom_toBottomOf="@+id/imageButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageButton"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/dem_logo" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.33" />
+
+        <TextView
+            android:id="@+id/addressTextview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="@+id/partyTextView"
+            app:layout_constraintTop_toBottomOf="@+id/imageButton" />
+
+        <TextView
+            android:id="@+id/phoneTextview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/addressTextview"
+            app:layout_constraintStart_toStartOf="@+id/addressTextview"
+            app:layout_constraintTop_toBottomOf="@+id/addressInfoTextView" />
+
+        <TextView
+            android:id="@+id/emailTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/addressTextview"
+            app:layout_constraintStart_toStartOf="@+id/addressTextview"
+            app:layout_constraintTop_toBottomOf="@+id/phoneInfoTextView" />
+
+        <TextView
+            android:id="@+id/websiteTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/addressTextview"
+            app:layout_constraintStart_toStartOf="@+id/addressTextview"
+            app:layout_constraintTop_toBottomOf="@+id/emailInfoTextview" />
+
+        <ImageButton
+            android:id="@+id/facebookImageButton"
+            android:layout_width="40dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="@string/facebookbutton"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/websiteTextView"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/facebook" />
+
+        <ImageButton
+            android:id="@+id/twitterImageButton"
+            android:layout_width="40dp"
+            android:layout_height="36dp"
+            android:contentDescription="@string/twitterbutton"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@+id/facebookImageButton"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/facebookImageButton"
+            app:srcCompat="@drawable/twitter" />
+
+        <ImageButton
+            android:id="@+id/youtubeImageButton"
+            android:layout_width="40dp"
+            android:layout_height="36dp"
+            android:contentDescription="@string/youtubebutton"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@+id/facebookImageButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toTopOf="@+id/facebookImageButton"
+            app:srcCompat="@drawable/youtube" />
+
+        <TextView
+            android:id="@+id/addressInfoTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/addressTextview" />
+
+        <TextView
+            android:id="@+id/phoneInfoTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/addressInfoTextView"
+            app:layout_constraintStart_toStartOf="@+id/addressInfoTextView"
+            app:layout_constraintTop_toTopOf="@+id/phoneTextview" />
+
+        <TextView
+            android:id="@+id/emailInfoTextview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/phoneInfoTextView"
+            app:layout_constraintStart_toStartOf="@+id/phoneInfoTextView"
+            app:layout_constraintTop_toTopOf="@+id/emailTextView" />
+
+        <TextView
+            android:id="@+id/websiteInfotextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/emailInfoTextview"
+            app:layout_constraintStart_toStartOf="@+id/emailInfoTextview"
+            app:layout_constraintTop_toTopOf="@+id/websiteTextView" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
+
+

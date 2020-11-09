@@ -9,4 +9,9 @@
     <string name="version_1_0">Version 1.0</string>
     <string name="about">About</string>
     <string name="search">Search</string>
+    <string name="officialimage">officialImage</string>
+    <string name="partyimage">partyImage</string>
+    <string name="facebookbutton">facebookButton</string>
+    <string name="twitterbutton">twitterButton</string>
+    <string name="youtubebutton">youtubeButton</string>
 </resources>

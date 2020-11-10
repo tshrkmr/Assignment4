@@ -8,10 +8,10 @@ public class SocialMediaChannel implements Serializable {
     private String twitterUrl;
     private String youtubeUrl;
 
-    public SocialMediaChannel(String facebookUrl, String twitterUrl, String youtubeUrl) {
-        this.facebookUrl = facebookUrl;
-        this.twitterUrl = twitterUrl;
-        this.youtubeUrl = youtubeUrl;
+    public SocialMediaChannel() {
+//        this.facebookUrl = facebookUrl;
+//        this.twitterUrl = twitterUrl;
+//        this.youtubeUrl = youtubeUrl;
     }
 
     public String getFacebookUrl() {

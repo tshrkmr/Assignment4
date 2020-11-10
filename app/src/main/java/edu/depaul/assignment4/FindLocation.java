@@ -89,15 +89,8 @@ public class FindLocation extends MainActivity {
         Location currentLocation = null;
         if (bestProvider != null) {
             currentLocation = locationManager.getLastKnownLocation(bestProvider);
-            //Log.d(TAG, "setLocation: " + currentLocation);
         }
         if (currentLocation != null) {
-//            ((TextView) findViewById(R.id.locText)).setText(
-//                    String.format(Locale.getDefault(),
-//                            "%.4f, %.4f", currentLocation.getLatitude(), currentLocation.getLongitude()));
-            String location = String.format(Locale.getDefault(),"%.4f, %.4f", currentLocation.getLatitude(), currentLocation.getLongitude());
-            //Toast.makeText(mainActivity, location, Toast.LENGTH_LONG).show();
-            //Log.d(TAG, "setLocation: " + location);
             mainActivity.findPostalCode(currentLocation.getLatitude(), currentLocation.getLongitude());
         } else {
             Log.d(TAG, "setLocation: " + "No Location");

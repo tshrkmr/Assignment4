@@ -3,6 +3,7 @@
     package="edu.depaul.assignment4">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -13,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Assignment4"
         android:usesCleartextTraffic="true">
-        <activity android:name=".OfficialActivity"></activity>
+        <activity android:name=".PhotoActivity"></activity>
+        <activity android:name=".OfficialActivity" />
         <activity android:name=".AboutActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

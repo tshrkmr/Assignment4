@@ -9,19 +9,20 @@ public class Official implements Serializable {
     private String officeAddress;
     private String party;
     private String officePhone;
-    private String url;
+    private String websiteUrl;
     private  String officeEmail;
     private SocialMediaChannel socialMediaChannel;
+    private String photoUrl;
 
-    public Official(String officeName, String officeHolder, String officeAddress, String party, String officePhone, String url, String officeEmail, SocialMediaChannel socialMediaChannel) {
+    public Official(String officeName) {
         this.officeName = officeName;
-        this.officeHolder = officeHolder;
-        this.officeAddress = officeAddress;
-        this.party = party;
-        this.officePhone = officePhone;
-        this.url = url;
-        this.officeEmail = officeEmail;
-        this.socialMediaChannel = socialMediaChannel;
+//        this.officeHolder = officeHolder;
+//        this.officeAddress = officeAddress;
+//        this.party = party;
+//        this.officePhone = officePhone;
+//        this.url = url;
+//        this.officeEmail = officeEmail;
+//        this.socialMediaChannel = socialMediaChannel;
     }
 
     public void setOfficeName(String officeName) {
@@ -44,8 +45,8 @@ public class Official implements Serializable {
         this.officePhone = officePhone;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setWebsiteUrl(String websiteUrl) {
+        this.websiteUrl = websiteUrl;
     }
 
     public void setOfficeEmail(String officeEmail) {
@@ -56,12 +57,20 @@ public class Official implements Serializable {
         this.socialMediaChannel = socialMediaChannel;
     }
 
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
+
     public String getOfficeName() {
         return officeName;
     }
 
     public String getOfficeHolder() {
         return officeHolder;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
     }
 
     public String getOfficeAddress() {
@@ -76,8 +85,8 @@ public class Official implements Serializable {
         return officePhone;
     }
 
-    public String getUrl() {
-        return url;
+    public String getWebsiteUrl() {
+        return websiteUrl;
     }
 
     public String getOfficeEmail() {
@@ -96,9 +105,10 @@ public class Official implements Serializable {
                 ", officeAddress='" + officeAddress + '\'' +
                 ", party='" + party + '\'' +
                 ", officePhone='" + officePhone + '\'' +
-                ", url='" + url + '\'' +
+                ", websiteUrl='" + websiteUrl + '\'' +
                 ", officeEmail='" + officeEmail + '\'' +
                 ", socialMediaChannel=" + socialMediaChannel +
+                ", photoUrl='" + photoUrl + '\'' +
                 '}';
     }
 }

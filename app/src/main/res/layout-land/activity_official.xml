@@ -2,13 +2,27 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/websiteInfoTextview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="viewStart"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/addressInfoTextView"
+            app:layout_constraintStart_toStartOf="@+id/addressInfoTextView"
+            app:layout_constraintTop_toTopOf="@+id/websiteTextView" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline2"
@@ -18,9 +32,14 @@
             app:layout_constraintGuide_percent="0.6" />
 
         <TextView
-            android:id="@+id/postalCodeTextview"
+            android:id="@+id/locationTextview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:background="@color/locationColor"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -30,18 +49,22 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:textSize="20sp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/postalCodeTextview" />
+            app:layout_constraintTop_toBottomOf="@+id/locationTextview" />
 
         <TextView
             android:id="@+id/nameTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:textSize="18sp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/titleTextview"
             app:layout_constraintStart_toStartOf="@+id/titleTextview"
@@ -51,7 +74,9 @@
             android:id="@+id/partyTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -62,8 +87,9 @@
             android:layout_width="189dp"
             android:layout_height="244dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginEnd="16dp"
             android:contentDescription="@string/officialimage"
+            android:scaleType="centerInside"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toBottomOf="@+id/partyTextView"
@@ -76,11 +102,10 @@
             android:contentDescription="@string/partyimage"
             app:layout_constraintBottom_toBottomOf="@+id/imageButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.87"
+            app:layout_constraintHorizontal_bias="0.831"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imageButton"
-            app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/dem_logo" />
+            app:layout_constraintVertical_bias="1.0" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
@@ -94,6 +119,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:text="@string/address"
+            android:textAlignment="viewStart"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/nameTextView" />
@@ -103,6 +133,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:text="@string/phone"
+            android:textAlignment="viewStart"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/addressTextview"
             app:layout_constraintStart_toStartOf="@+id/addressTextview"
             app:layout_constraintTop_toBottomOf="@+id/addressInfoTextView" />
@@ -112,6 +147,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:text="@string/email"
+            android:textAlignment="viewStart"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/addressTextview"
             app:layout_constraintStart_toStartOf="@+id/addressTextview"
             app:layout_constraintTop_toBottomOf="@+id/phoneInfoTextView" />
@@ -121,18 +161,24 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:text="@string/website"
+            android:textAlignment="viewStart"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/addressTextview"
             app:layout_constraintStart_toStartOf="@+id/addressTextview"
             app:layout_constraintTop_toBottomOf="@+id/emailInfoTextview" />
 
         <ImageButton
             android:id="@+id/facebookImageButton"
-            android:layout_width="40dp"
-            android:layout_height="36dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginTop="86dp"
             android:layout_marginBottom="16dp"
             android:contentDescription="@string/facebookbutton"
-            android:scaleType="centerCrop"
+            android:onClick="facebookClicked"
+            android:scaleType="centerInside"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintStart_toStartOf="parent"
@@ -142,10 +188,11 @@
 
         <ImageButton
             android:id="@+id/twitterImageButton"
-            android:layout_width="40dp"
-            android:layout_height="36dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:contentDescription="@string/twitterbutton"
-            android:scaleType="centerCrop"
+            android:onClick="twitterClicked"
+            android:scaleType="centerInside"
             app:layout_constraintBottom_toBottomOf="@+id/facebookImageButton"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintHorizontal_bias="0.30"
@@ -156,10 +203,12 @@
 
         <ImageButton
             android:id="@+id/youtubeImageButton"
-            android:layout_width="40dp"
-            android:layout_height="36dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:clickable="true"
             android:contentDescription="@string/youtubebutton"
-            android:scaleType="centerCrop"
+            android:onClick="youTubeClicked"
+            android:scaleType="centerInside"
             app:layout_constraintBottom_toBottomOf="@+id/facebookImageButton"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintHorizontal_bias="0.80"
@@ -173,6 +222,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:textAlignment="viewStart"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toTopOf="@+id/addressTextview" />
@@ -181,6 +234,10 @@
             android:id="@+id/phoneInfoTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:textAlignment="viewStart"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/addressInfoTextView"
             app:layout_constraintStart_toStartOf="@+id/addressInfoTextView"
             app:layout_constraintTop_toTopOf="@+id/phoneTextview" />
@@ -189,17 +246,13 @@
             android:id="@+id/emailInfoTextview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:textAlignment="viewStart"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/phoneInfoTextView"
             app:layout_constraintStart_toStartOf="@+id/phoneInfoTextView"
             app:layout_constraintTop_toTopOf="@+id/emailTextView" />
-
-        <TextView
-            android:id="@+id/websiteInfotextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@+id/emailInfoTextview"
-            app:layout_constraintStart_toStartOf="@+id/emailInfoTextview"
-            app:layout_constraintTop_toTopOf="@+id/websiteTextView" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

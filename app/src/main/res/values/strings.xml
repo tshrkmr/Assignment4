@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Know Your GovernMent</string>
+    <string name="app_name">Know Your Government</string>
     <string name="seperator">seperator</string>
     <string name="separator">separator</string>
     <string name="know_your_government">Know Your Government</string>
@@ -14,4 +14,8 @@
     <string name="facebookbutton">facebookButton</string>
     <string name="twitterbutton">twitterButton</string>
     <string name="youtubebutton">youtubeButton</string>
+    <string name="phone">Phone:</string>
+    <string name="address">Address:</string>
+    <string name="email">Email:</string>
+    <string name="website">Website:</string>
 </resources>

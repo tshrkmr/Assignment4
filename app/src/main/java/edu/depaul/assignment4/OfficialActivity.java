@@ -1,20 +1,19 @@
 package edu.depaul.assignment4;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -39,6 +38,8 @@ public class OfficialActivity extends AppCompatActivity {
     private ImageButton youtube;
     private Official official;
     private ScrollView scrollView;
+    private static String targetPartyURL;
+    private static String targetOfficialURL;
     private static final String TAG = "OfficialActivity";
 
     @Override
@@ -47,7 +48,7 @@ public class OfficialActivity extends AppCompatActivity {
         setContentView(R.layout.activity_official);
         initializeTextViews();
         enterData();
-        link();
+        //link();
     }
 
     private void initializeTextViews(){
@@ -73,10 +74,13 @@ public class OfficialActivity extends AppCompatActivity {
 
     private void enterData(){
         Intent intent = getIntent();
+
         if(intent.hasExtra("location")){
             location.setText(intent.getStringExtra("location"));
         }
+
         official = (Official) intent.getSerializableExtra("official");
+
         if(official.getParty()!=null){
             if (official.getParty().equals("Republican Party")){
                 scrollView.setBackgroundColor(Color.RED);
@@ -86,6 +90,7 @@ public class OfficialActivity extends AppCompatActivity {
                 party.setText(String.format("(%s)", official.getParty()));
                 symbol.setImageResource(R.drawable.rep_logo);
                 photo.setBackgroundColor(Color.RED);
+                targetPartyURL = "https://www.gop.com";
             }
             else if (official.getParty().equals("Democratic Party")) {
                 scrollView.setBackgroundColor(Color.BLUE);
@@ -95,6 +100,7 @@ public class OfficialActivity extends AppCompatActivity {
                 party.setText(String.format("(%s)", official.getParty()));
                 symbol.setImageResource(R.drawable.dem_logo);
                 photo.setBackgroundColor(Color.BLUE);
+                targetPartyURL = "https://democrats.org";
             }
             else {
                 scrollView.setBackgroundColor(Color.BLACK);
@@ -104,47 +110,59 @@ public class OfficialActivity extends AppCompatActivity {
             scrollView.setBackgroundColor(Color.BLACK);
             symbol.setVisibility(View.GONE);
         }
+
         if (official.getOfficeName() != null)
             title.setText(official.getOfficeName());
+
         if (official.getOfficeHolder() != null)
             name.setText(official.getOfficeHolder());
+
         if (official.getOfficeAddress() != null)
             addressInfo.setText(official.getOfficeAddress());
         else {
             address.setVisibility(View.GONE);
             addressInfo.setVisibility(View.GONE);
         }
+
         if (official.getOfficePhone() != null)
             phoneInfo.setText(official.getOfficePhone());
         else{
             phone.setVisibility(View.GONE);
             phoneInfo.setVisibility(View.GONE);
         }
+
         if (official.getOfficeEmail() != null)
             emailInfo.setText(official.getOfficeEmail());
         else{
             email.setVisibility(View.GONE);
             emailInfo.setVisibility(View.GONE);
         }
+
         if (official.getWebsiteUrl() != null){
             websiteInfo.setText(official.getWebsiteUrl());
+            targetOfficialURL = official.getWebsiteUrl();
         Log.d(TAG, "enterData: " +official.getWebsiteUrl());}
         else{
             website.setVisibility(View.GONE);
             websiteInfo.setVisibility(View.GONE);
         }
-        if (official.getSocialMediaChannel().getFacebookUrl() == null)
+
+        if(official.getSocialMediaChannel() ==null){
+            facebook.setVisibility(View.GONE);
+            youtube.setVisibility(View.GONE);
+            twitter.setVisibility(View.GONE);
+        }else if (official.getSocialMediaChannel().getFacebookUrl() == null)
                 facebook.setVisibility(View.GONE);
-        if (official.getSocialMediaChannel().getYoutubeUrl() == null)
+        else if (official.getSocialMediaChannel().getYoutubeUrl() == null)
                 youtube.setVisibility(View.GONE);
-        if (official.getSocialMediaChannel().getTwitterUrl() == null)
+        else if (official.getSocialMediaChannel().getTwitterUrl() == null)
                 twitter.setVisibility(View.GONE);
-            loadRemoteImage(official.getPhotoUrl());
+
+        loadRemoteImage(official.getPhotoUrl());
     }
 
     private void loadRemoteImage(final String imageURL) {
         // Needs gradle  implementation 'com.squareup.picasso:picasso:2.71828'
-
         if(imageURL == null){
             photo.setImageResource(R.drawable.missing);
         }else {
@@ -155,12 +173,12 @@ public class OfficialActivity extends AppCompatActivity {
         }
     }
 
-    private void link(){
-        Linkify.addLinks(addressInfo, Linkify.MAP_ADDRESSES);
-        Linkify.addLinks(phoneInfo, Linkify.PHONE_NUMBERS);
-        Linkify.addLinks(emailInfo, Linkify.EMAIL_ADDRESSES);
-        Linkify.addLinks(websiteInfo, Linkify.WEB_URLS);
-    }
+//    private void link(){
+//        Linkify.addLinks(addressInfo, Linkify.ALL);
+//        Linkify.addLinks(phoneInfo, Linkify.PHONE_NUMBERS);
+//        Linkify.addLinks(emailInfo, Linkify.EMAIL_ADDRESSES);
+//        Linkify.addLinks(websiteInfo, Linkify.WEB_URLS);
+//    }
 
     public void twitterClicked(View v) {
         Intent intent;
@@ -208,6 +226,69 @@ public class OfficialActivity extends AppCompatActivity {
             startActivity(new Intent(Intent.ACTION_VIEW,
                     Uri.parse("https://www.youtube.com/" + name)));
         }
+    }
+
+    public void openPartyWebsite(View v){
+        if(targetPartyURL == null)
+            return;
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(targetPartyURL));
+        startActivity(i);
+    }
+
+    public void clickMap(View v) {
+        String address = official.getOfficeAddress();
+
+        Uri mapUri = Uri.parse("geo:0,0?q=" + Uri.encode(address));
+
+        Intent intent = new Intent(Intent.ACTION_VIEW, mapUri);
+        intent.setPackage("com.google.android.apps.maps");
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "No Application found that handles Addresses", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void clickCall(View v) {
+        String number = official.getOfficePhone();
+
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:" + number));
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "No Application found that handles Calls", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void clickEmail(View v) {
+        String addresses = official.getOfficeEmail();
+
+        Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"));
+
+        intent.putExtra(Intent.EXTRA_EMAIL, addresses);
+        intent.putExtra(Intent.EXTRA_SUBJECT, "This comes from EXTRA_SUBJECT");
+        intent.putExtra(Intent.EXTRA_TEXT, "Email text body from EXTRA_TEXT...");
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(intent, 111);
+        } else {
+            Toast.makeText(this, "No Application found that handles Emails", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void clickWebsite(View v) {
+        if(targetOfficialURL == null)
+            return;
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(targetOfficialURL));
+        startActivity(i);
+    }
+
+    public void openPhotoActivity(View v){
 
     }
 }

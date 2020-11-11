@@ -5,7 +5,7 @@
     android:id="@+id/scrollview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".OfficialActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/contrainLayout"
@@ -81,7 +81,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="64dp"
             android:contentDescription="@string/officialimage"
-            android:scaleType="fitCenter"
+            android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -90,9 +90,12 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="113dp"
-            android:layout_height="78dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:contentDescription="@string/partyimage"
+            android:contextClickable="false"
+            android:onClick="openPartyWebsite"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="@+id/imageButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -170,7 +173,7 @@
             android:layout_marginTop="16dp"
             android:contentDescription="@string/facebookbutton"
             android:onClick="facebookClicked"
-            android:scaleType="fitCenter"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintStart_toStartOf="parent"
@@ -180,11 +183,11 @@
 
         <ImageButton
             android:id="@+id/twitterImageButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:contentDescription="@string/twitterbutton"
             android:onClick="twitterClicked"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="@+id/facebookImageButton"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -193,11 +196,11 @@
 
         <ImageButton
             android:id="@+id/youtubeImageButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:contentDescription="@string/youtubebutton"
             android:onClick="youTubeClicked"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="@+id/facebookImageButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -210,6 +213,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
+            android:onClick="clickMap"
             android:textAlignment="viewStart"
             android:textColor="@color/white"
             android:textSize="18sp"
@@ -222,6 +226,7 @@
             android:id="@+id/phoneInfoTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:onClick="clickCall"
             android:textAlignment="viewStart"
             android:textColor="@color/white"
             android:textSize="18sp"
@@ -234,6 +239,7 @@
             android:id="@+id/emailInfoTextview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:onClick="clickEmail"
             android:textAlignment="viewStart"
             android:textColor="@color/white"
             android:textSize="18sp"
@@ -246,6 +252,7 @@
             android:id="@+id/websiteInfoTextview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:onClick="clickWebsite"
             android:textAlignment="viewStart"
             android:textColor="@color/white"
             android:textSize="18sp"

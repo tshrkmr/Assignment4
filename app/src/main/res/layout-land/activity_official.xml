@@ -5,7 +5,7 @@
     android:id="@+id/scrollview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".OfficialActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -16,6 +16,7 @@
             android:id="@+id/websiteInfoTextview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:onClick="clickWebsite"
             android:textAlignment="viewStart"
             android:textColor="@color/white"
             android:textSize="18sp"
@@ -89,7 +90,8 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:contentDescription="@string/officialimage"
-            android:scaleType="centerInside"
+            android:onClick="openPhotoActivity"
+            android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toBottomOf="@+id/partyTextView"
@@ -97,15 +99,17 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="113dp"
-            android:layout_height="78dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:contentDescription="@string/partyimage"
+            android:onClick="openPartyWebsite"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="@+id/imageButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.831"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imageButton"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="0.939" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
@@ -178,9 +182,10 @@
             android:layout_marginBottom="16dp"
             android:contentDescription="@string/facebookbutton"
             android:onClick="facebookClicked"
-            android:scaleType="centerInside"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/websiteTextView"
             app:layout_constraintVertical_bias="0.0"
@@ -188,14 +193,14 @@
 
         <ImageButton
             android:id="@+id/twitterImageButton"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:contentDescription="@string/twitterbutton"
             android:onClick="twitterClicked"
-            android:scaleType="centerInside"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="@+id/facebookImageButton"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
-            app:layout_constraintHorizontal_bias="0.30"
+            app:layout_constraintHorizontal_bias="0.369"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toTopOf="@+id/facebookImageButton"
             app:layout_constraintVertical_bias="0.0"
@@ -203,15 +208,15 @@
 
         <ImageButton
             android:id="@+id/youtubeImageButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:clickable="true"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:clickable="false"
             android:contentDescription="@string/youtubebutton"
             android:onClick="youTubeClicked"
-            android:scaleType="centerInside"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="@+id/facebookImageButton"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
-            app:layout_constraintHorizontal_bias="0.80"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toTopOf="@+id/facebookImageButton"
             app:layout_constraintVertical_bias="0.0"
@@ -222,6 +227,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:onClick="clickMap"
             android:textAlignment="viewStart"
             android:textColor="@color/white"
             android:textSize="18sp"
@@ -234,6 +240,7 @@
             android:id="@+id/phoneInfoTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:onClick="clickCall"
             android:textAlignment="viewStart"
             android:textColor="@color/white"
             android:textSize="18sp"
@@ -246,6 +253,7 @@
             android:id="@+id/emailInfoTextview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:onClick="clickEmail"
             android:textAlignment="viewStart"
             android:textColor="@color/white"
             android:textSize="18sp"

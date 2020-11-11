@@ -3,28 +3,21 @@ package edu.depaul.assignment4;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.location.Address;
 import android.location.Criteria;
-import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.util.Log;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 public class FindLocation extends MainActivity {
 
-    private MainActivity mainActivity;
+    private final MainActivity mainActivity;
     private LocationManager locationManager;
     private Criteria criteria;
-    private static int MY_LOCATION_REQUEST_CODE_ID = 111;
+    private static final int MY_LOCATION_REQUEST_CODE_ID = 111;
     private static final String TAG = "FindLocation";
 
     public FindLocation(MainActivity mainActivity) {

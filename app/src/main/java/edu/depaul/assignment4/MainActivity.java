@@ -8,11 +8,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
-import android.location.Criteria;
 import android.location.Geocoder;
-import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -33,13 +32,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private OfficialAdapter officialAdapter;
     private RecyclerView recyclerView;
-    private SocialMediaChannel socialMediaChannel;
     private final List<Official> officialList = new ArrayList<>();
-    private LocationManager locationManager;
-    private Criteria criteria;
-    private static int MY_LOCATION_REQUEST_CODE_ID = 111;
     private static final String TAG = "MainActivity";
-    private int position;
     private TextView locationText;
     private static final int Request_Code = 123;
     private String choice;
@@ -63,7 +57,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            officialList.add(official);
 //        }
         setUpRecyclerView();
-        new FindLocation(this);
+        if(!checkNetworkConnection()){
+            noConnectionDialog();
+        }else {
+            new FindLocation(this);
+        }
     }
 
     private void setUpRecyclerView(){
@@ -118,8 +116,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         builder.setPositiveButton("OK", (dialog, id) -> {
             choice = et.getText().toString().trim();
-            InformationDownloader informationDownloader = new InformationDownloader(this, choice);
-            new Thread(informationDownloader).start();
+            informationDownload(choice);
         });
         builder.setNegativeButton("CANCEL", (dialog, id) -> {
             // User cancelled the dialog
@@ -157,11 +154,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         try {
             List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
             String postalCode = addresses.get(0).getPostalCode();
-            Toast.makeText(this, postalCode, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, postalCode, Toast.LENGTH_SHORT).show();
             Log.d(TAG, "findPostalCode: " + postalCode);
-            String demoCode = "60605";
-            InformationDownloader informationDownloader = new InformationDownloader(this, demoCode);
-            new Thread(informationDownloader).start();
+            informationDownload(postalCode);
         }catch (IOException e){
             Log.d(TAG, "findPostalCode: " + " address not found");
         }
@@ -179,5 +174,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void updateOfficialList(Official official){
         officialList.add(official);
         officialAdapter.notifyDataSetChanged();
+    }
+
+    private void informationDownload(String postalCode){
+        InformationDownloader informationDownloader = new InformationDownloader(this, postalCode);
+        new Thread(informationDownloader).start();
     }
 }

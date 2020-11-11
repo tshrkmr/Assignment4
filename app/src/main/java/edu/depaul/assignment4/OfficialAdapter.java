@@ -11,8 +11,8 @@ import java.util.List;
 
 public class OfficialAdapter extends RecyclerView.Adapter<OfficialViewHolder> {
 
-    private List<Official> officialList;
-    private MainActivity mainActivity;
+    private final List<Official> officialList;
+    private final MainActivity mainActivity;
 
     public OfficialAdapter(List<Official> list, MainActivity mainActivity) {
         this.officialList = list;
@@ -31,7 +31,7 @@ public class OfficialAdapter extends RecyclerView.Adapter<OfficialViewHolder> {
     public void onBindViewHolder(@NonNull OfficialViewHolder holder, int position) {
         Official official = officialList.get(position);
         holder.officeTitle.setText(official.getOfficeName());
-        holder.officeHolder.setText(official.getOfficeHolder());
+        holder.officeHolder.setText(String.format("%s (%s)", official.getOfficeHolder(), official.getParty()));
     }
 
     @Override

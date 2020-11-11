@@ -73,7 +73,6 @@ public class InformationDownloader implements Runnable{
             JSONArray jArrayOffices = jObjMain.getJSONArray("offices");
             JSONArray jArrayOfficials = jObjMain.getJSONArray("officials");
 
-            //String locationText = jNormalInput.getString("city")+", "+jNormalInput.getString("state")+" "+jNormalInput.getString("zip");
             mainActivity.setLocation(jNormalInput.getString("city"), jNormalInput.getString("state"), jNormalInput.get("zip").toString());
 
             int length = jArrayOffices.length();

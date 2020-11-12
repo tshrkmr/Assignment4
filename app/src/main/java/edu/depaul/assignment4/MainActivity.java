@@ -11,7 +11,6 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -21,8 +20,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private final List<Official> officialList = new ArrayList<>();
     private static final String TAG = "MainActivity";
     private TextView locationText;
-    private static final int Request_Code = 123;
     private String choice;
 
     @Override
@@ -77,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent(this, OfficialActivity.class);
         intent.putExtra("location", locationText.getText().toString());
         intent.putExtra("official", officialList.get(position));
-        startActivityForResult(intent, Request_Code);
+        startActivity(intent);
     }
 
     @Override

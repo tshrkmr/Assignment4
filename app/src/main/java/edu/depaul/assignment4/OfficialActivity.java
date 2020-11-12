@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -31,13 +30,14 @@ public class OfficialActivity extends AppCompatActivity {
     private TextView phoneInfo;
     private TextView emailInfo;
     private TextView websiteInfo;
-    private ImageView symbol;
-    private ImageButton photo;
+    private ImageView logo;
+    private ImageButton imageButton;
     private ImageButton facebook;
     private ImageButton twitter;
     private ImageButton youtube;
     private Official official;
     private ScrollView scrollView;
+    private String locationValue;
     private static String targetPartyURL;
     private static String targetOfficialURL;
     private static final String TAG = "OfficialActivity";
@@ -46,12 +46,12 @@ public class OfficialActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_official);
-        initializeTextViews();
+        initializeFields();
         enterData();
         //link();
     }
 
-    private void initializeTextViews(){
+    private void initializeFields(){
         location = findViewById(R.id.locationTextview);
         title = findViewById(R.id.titleTextview);
         name = findViewById(R.id.nameTextView);
@@ -64,58 +64,70 @@ public class OfficialActivity extends AppCompatActivity {
         phoneInfo = findViewById(R.id.phoneInfoTextView);
         emailInfo = findViewById(R.id.emailInfoTextview);
         websiteInfo = findViewById(R.id.websiteInfoTextview);
-        photo = findViewById(R.id.imageButton);
+        imageButton = findViewById(R.id.imageButton);
         facebook = findViewById(R.id.facebookImageButton);
         twitter = findViewById(R.id.twitterImageButton);
         youtube = findViewById(R.id.youtubeImageButton);
         scrollView = findViewById(R.id.scrollview);
-        symbol = findViewById(R.id.imageView);
+        logo = findViewById(R.id.imageView);
     }
 
     private void enterData(){
         Intent intent = getIntent();
 
         if(intent.hasExtra("location")){
-            location.setText(intent.getStringExtra("location"));
+            locationValue = intent.getStringExtra("location");
+            location.setText(locationValue);
         }
 
         official = (Official) intent.getSerializableExtra("official");
 
         if(official.getParty()!=null){
-            if (official.getParty().equals("Republican Party")){
+            if (official.getParty().equals("Republican Party") || official.getParty().equals("Republican")){
                 scrollView.setBackgroundColor(Color.RED);
                 facebook.setBackgroundColor(Color.RED);
                 twitter.setBackgroundColor(Color.RED);
                 youtube.setBackgroundColor(Color.RED);
-                party.setText(String.format("(%s)", official.getParty()));
-                symbol.setImageResource(R.drawable.rep_logo);
-                photo.setBackgroundColor(Color.RED);
+                if(official.getParty().equals("Republican")){
+                    party.setText(String.format("(%s Party)", official.getParty()));
+                }else party.setText(String.format("(%s)", official.getParty()));
+                logo.setImageResource(R.drawable.rep_logo);
+                imageButton.setBackgroundColor(Color.RED);
                 targetPartyURL = "https://www.gop.com";
             }
-            else if (official.getParty().equals("Democratic Party")) {
+            else if (official.getParty().equals("Democratic Party") || official.getParty().equals("Democratic")) {
                 scrollView.setBackgroundColor(Color.BLUE);
                 facebook.setBackgroundColor(Color.BLUE);
                 twitter.setBackgroundColor(Color.BLUE);
                 youtube.setBackgroundColor(Color.BLUE);
-                party.setText(String.format("(%s)", official.getParty()));
-                symbol.setImageResource(R.drawable.dem_logo);
-                photo.setBackgroundColor(Color.BLUE);
+                if(official.getParty().equals("Democratic")){
+                    party.setText(String.format("(%s Party)", official.getParty()));
+                }else party.setText(String.format("(%s)", official.getParty()));
+                logo.setImageResource(R.drawable.dem_logo);
+                imageButton.setBackgroundColor(Color.BLUE);
                 targetPartyURL = "https://democrats.org";
             }
             else {
                 scrollView.setBackgroundColor(Color.BLACK);
-                symbol.setVisibility(View.GONE);
+                logo.setVisibility(View.GONE);
+                party.setVisibility(View.GONE);
+                facebook.setBackgroundColor(Color.BLACK);
+                twitter.setBackgroundColor(Color.BLACK);
+                youtube.setBackgroundColor(Color.BLACK);
+                imageButton.setBackgroundColor(Color.BLACK);
             }
         }else {
             scrollView.setBackgroundColor(Color.BLACK);
-            symbol.setVisibility(View.GONE);
+            logo.setVisibility(View.GONE);
+            party.setVisibility(View.GONE);
+            facebook.setBackgroundColor(Color.BLACK);
+            twitter.setBackgroundColor(Color.BLACK);
+            youtube.setBackgroundColor(Color.BLACK);
+            imageButton.setBackgroundColor(Color.BLACK);
         }
 
-        if (official.getOfficeName() != null)
-            title.setText(official.getOfficeName());
-
-        if (official.getOfficeHolder() != null)
-            name.setText(official.getOfficeHolder());
+        title.setText(official.getOfficeName());
+        name.setText(official.getOfficeHolder());
 
         if (official.getOfficeAddress() != null)
             addressInfo.setText(official.getOfficeAddress());
@@ -141,7 +153,7 @@ public class OfficialActivity extends AppCompatActivity {
         if (official.getWebsiteUrl() != null){
             websiteInfo.setText(official.getWebsiteUrl());
             targetOfficialURL = official.getWebsiteUrl();
-        Log.d(TAG, "enterData: " +official.getWebsiteUrl());}
+        }
         else{
             website.setVisibility(View.GONE);
             websiteInfo.setVisibility(View.GONE);
@@ -164,18 +176,18 @@ public class OfficialActivity extends AppCompatActivity {
     private void loadRemoteImage(final String imageURL) {
         // Needs gradle  implementation 'com.squareup.picasso:picasso:2.71828'
         if(imageURL == null){
-            photo.setImageResource(R.drawable.missing);
+            imageButton.setImageResource(R.drawable.missing);
         }else {
             Picasso.get().load(imageURL)
                     .error(R.drawable.brokenimage)
                     .placeholder(R.drawable.placeholder)
-                    .into(photo);
+                    .into(imageButton);
         }
     }
 
 //    private void link(){
 //        Linkify.addLinks(addressInfo, Linkify.ALL);
-//        Linkify.addLinks(phoneInfo, Linkify.PHONE_NUMBERS);
+//        Linkify.addLinks(phoneInfo, Linkify.ALL);
 //        Linkify.addLinks(emailInfo, Linkify.EMAIL_ADDRESSES);
 //        Linkify.addLinks(websiteInfo, Linkify.WEB_URLS);
 //    }
@@ -289,6 +301,11 @@ public class OfficialActivity extends AppCompatActivity {
     }
 
     public void openPhotoActivity(View v){
-
+        if(official.getPhotoUrl() == null)
+            return;
+        Intent intent = new Intent(this, PhotoActivity.class);
+        intent.putExtra("photoLocation", locationValue);
+        intent.putExtra("photoOfficial", official);
+        startActivity(intent);
     }
 }

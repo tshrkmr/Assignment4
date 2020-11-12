@@ -7,16 +7,24 @@
     android:layout_height="match_parent"
     tools:context=".PhotoActivity">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.60"/>
+
     <ImageButton
         android:id="@+id/photoImageButton"
-        android:layout_width="293dp"
-        android:layout_height="399dp"
+        android:layout_width="211dp"
+        android:layout_height="250dp"
         android:layout_marginTop="16dp"
         android:contentDescription="@string/officialimage"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.923"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/photoOfficeHolderTextView"
+        app:layout_constraintTop_toBottomOf="@+id/photoLocationTextview"
         app:srcCompat="@drawable/brokenimage" />
 
     <TextView
@@ -43,8 +51,7 @@
         android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/photoLocationTextview" />
 
@@ -63,14 +70,14 @@
 
     <ImageView
         android:id="@+id/photoImageView"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="44dp"
         android:contentDescription="@string/partyimage"
         android:contextClickable="false"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="@+id/photoImageButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.276"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/photoImageButton"
-        app:layout_constraintVertical_bias="0.966" />
+        app:layout_constraintTop_toBottomOf="@+id/photoOfficeHolderTextView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

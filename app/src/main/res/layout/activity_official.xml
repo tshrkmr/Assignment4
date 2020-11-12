@@ -64,7 +64,7 @@
             android:id="@+id/partyTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="18sp"
@@ -75,15 +75,13 @@
 
         <ImageButton
             android:id="@+id/imageButton"
-            android:layout_width="0dp"
-            android:layout_height="316dp"
-            android:layout_marginStart="64dp"
+            android:layout_width="283dp"
+            android:layout_height="334dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="64dp"
             android:contentDescription="@string/officialimage"
+            android:onClick="openPhotoActivity"
             android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/partyTextView"
             app:srcCompat="@drawable/brokenimage" />
@@ -168,9 +166,9 @@
 
         <ImageButton
             android:id="@+id/facebookImageButton"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="40dp"
             android:contentDescription="@string/facebookbutton"
             android:onClick="facebookClicked"
             android:scaleType="fitXY"

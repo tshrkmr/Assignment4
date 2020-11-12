@@ -7,6 +7,8 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.util.Log;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -19,6 +21,7 @@ public class FindLocation extends MainActivity {
     private Criteria criteria;
     private static final int MY_LOCATION_REQUEST_CODE_ID = 111;
     private static final String TAG = "FindLocation";
+    private Location currentLocation;
 
     public FindLocation(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
@@ -68,7 +71,6 @@ public class FindLocation extends MainActivity {
             if (permissions[0].equals(Manifest.permission.ACCESS_FINE_LOCATION) &&
                     grantResults[0] == PERMISSION_GRANTED) {
                 setLocation();
-                return;
             }
         }
 
@@ -79,12 +81,13 @@ public class FindLocation extends MainActivity {
 
         String bestProvider = locationManager.getBestProvider(criteria, true);
         Log.d(TAG, "setLocation: " + bestProvider);
-        Location currentLocation = null;
+        //Location currentLocation = null;
         if (bestProvider != null) {
             currentLocation = locationManager.getLastKnownLocation(bestProvider);
         }
         if (currentLocation != null) {
             mainActivity.findPostalCode(currentLocation.getLatitude(), currentLocation.getLongitude());
+            Log.d(TAG, "setLocation: " + currentLocation.getLatitude() + " " + currentLocation.getLongitude());
         } else {
             Log.d(TAG, "setLocation: " + "No Location");
             //Toast.makeText(mainActivity, "No Location", Toast.LENGTH_LONG).show();

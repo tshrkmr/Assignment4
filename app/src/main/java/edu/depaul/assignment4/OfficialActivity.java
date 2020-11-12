@@ -110,7 +110,7 @@ public class OfficialActivity extends AppCompatActivity {
             else {
                 scrollView.setBackgroundColor(Color.BLACK);
                 logo.setVisibility(View.GONE);
-                party.setVisibility(View.GONE);
+                //party.setVisibility(View.GONE);
                 facebook.setBackgroundColor(Color.BLACK);
                 twitter.setBackgroundColor(Color.BLACK);
                 youtube.setBackgroundColor(Color.BLACK);
@@ -119,7 +119,7 @@ public class OfficialActivity extends AppCompatActivity {
         }else {
             scrollView.setBackgroundColor(Color.BLACK);
             logo.setVisibility(View.GONE);
-            party.setVisibility(View.GONE);
+            //party.setVisibility(View.GONE);
             facebook.setBackgroundColor(Color.BLACK);
             twitter.setBackgroundColor(Color.BLACK);
             youtube.setBackgroundColor(Color.BLACK);

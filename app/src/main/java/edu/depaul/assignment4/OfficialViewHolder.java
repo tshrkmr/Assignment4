@@ -15,8 +15,8 @@ public class OfficialViewHolder extends RecyclerView.ViewHolder {
 
     public OfficialViewHolder(@NonNull View itemView) {
         super(itemView);
-        officeTitle = itemView.findViewById(R.id.listTitleTextview);
-        officeHolder = itemView.findViewById(R.id.listNameTextview);
-        separator = itemView.findViewById(R.id.separatorImageView);
+        officeTitle = itemView.findViewById(R.id.listOfficeTitleTextview);
+        officeHolder = itemView.findViewById(R.id.listOfficeHolderTextview);
+        separator = itemView.findViewById(R.id.listSeparatorImageView);
     }
 }

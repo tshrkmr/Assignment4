@@ -54,7 +54,7 @@ public class InformationDownloader implements Runnable{
                 sb.append(line).append('\n');
             }
 
-            Log.d(TAG, "run: " + sb.toString());
+            //Log.d(TAG, "run: " + sb.toString());
 
         } catch (Exception e) {
             Log.e(TAG, "run: ", e);

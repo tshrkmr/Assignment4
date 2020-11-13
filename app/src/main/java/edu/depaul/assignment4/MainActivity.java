@@ -28,7 +28,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -45,11 +44,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private LocationManager locationManager;
     private Criteria criteria;
     private Location currentLocation = null;
-    private static int MY_LOCATION_REQUEST_CODE_ID = 111;
+    private static final int MY_LOCATION_REQUEST_CODE_ID = 111;
     private static final String TAG = "MainActivity";
     private TextView locationText;
     private String choice;
-    private boolean first = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,10 +70,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setUpRecyclerView();
         if(!checkNetworkConnection()){
             noConnectionDialog();
-        }else {
-            //new FindLocation(this);
-            findLocation();
         }
+        findLocation();
+            //new FindLocation(this);
     }
 
     private void findLocation(){
@@ -106,6 +103,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             setLocation();
         }
+    }
+
+    private void setUpRecyclerView(){
+        recyclerView = findViewById(R.id.listOfficeHolderTextview);
+        officialAdapter = new OfficialAdapter(officialList, this);
+        recyclerView.setAdapter(officialAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
@@ -139,13 +143,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.d(TAG, "setLocation: " + "No Location");
         }
 
-    }
-
-    private void setUpRecyclerView(){
-        recyclerView = findViewById(R.id.listOfficeHolderTextview);
-        officialAdapter = new OfficialAdapter(officialList, this);
-        recyclerView.setAdapter(officialAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
@@ -210,10 +207,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
-//        if(netInfo != null && netInfo.isConnectedOrConnecting() && first){
-//            new FindLocation(this);
-//            first = false;
-//        }
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
@@ -235,7 +228,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         try {
             List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
             String postalCode = addresses.get(0).getPostalCode();
-            //Toast.makeText(this, postalCode, Toast.LENGTH_SHORT).show();
             //Log.d(TAG, "findPostalCode: " + postalCode);
             informationDownload(postalCode);
         }catch (IOException e){

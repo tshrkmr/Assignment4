@@ -13,6 +13,7 @@ public class OfficialAdapter extends RecyclerView.Adapter<OfficialViewHolder> {
 
     private final List<Official> officialList;
     private final MainActivity mainActivity;
+    private String party = "";
 
     public OfficialAdapter(List<Official> list, MainActivity mainActivity) {
         this.officialList = list;
@@ -31,7 +32,13 @@ public class OfficialAdapter extends RecyclerView.Adapter<OfficialViewHolder> {
     public void onBindViewHolder(@NonNull OfficialViewHolder holder, int position) {
         Official official = officialList.get(position);
         holder.officeTitle.setText(official.getOfficeName());
-        holder.officeHolder.setText(String.format("%s (%s)", official.getOfficeHolder(), official.getParty()));
+
+        if(official.getParty().equals("Republican") || official.getParty().equals("Democratic")) {
+            party = String.format("%s Party", official.getParty());
+        }else
+            party = official.getParty();
+
+        holder.officeHolder.setText(String.format("%s (%s)", official.getOfficeHolder(), party));
     }
 
     @Override

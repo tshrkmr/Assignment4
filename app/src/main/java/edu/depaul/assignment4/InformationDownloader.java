@@ -70,48 +70,46 @@ public class InformationDownloader implements Runnable{
             JSONObject jObjMain = new JSONObject(s);
 
             JSONObject jNormalInput = jObjMain.getJSONObject("normalizedInput");
-            JSONArray jArrayOffices = jObjMain.getJSONArray("offices");
-            JSONArray jArrayOfficials = jObjMain.getJSONArray("officials");
+            JSONArray jOfficesArray = jObjMain.getJSONArray("offices");
+            JSONArray jOfficialsArray = jObjMain.getJSONArray("officials");
 
             mainActivity.setLocation(jNormalInput.getString("city"), jNormalInput.getString("state"), jNormalInput.get("zip").toString());
 
-            int length = jArrayOffices.length();
+            int length = jOfficesArray.length();
             mainActivity.clearOfficialList();
 
             for (int i = 0; i<length; i++){
-                JSONObject jObj = jArrayOffices.getJSONObject(i);
+                JSONObject jObj = jOfficesArray.getJSONObject(i);
                 String officeName = jObj.getString("name");
                 //Log.d(TAG, "process: " + officeName);
 
                 JSONArray indicesStr = jObj.getJSONArray("officialIndices");
-                ArrayList<Integer> indices = new ArrayList<>();
 
                 for (int j = 0; j<indicesStr.length(); j++){
                     int pos = Integer.parseInt(indicesStr.getString(j));
                     Official official = new Official(officeName);
-                    JSONObject jOfficial = jArrayOfficials.getJSONObject(pos);
+                    JSONObject jOfficial = jOfficialsArray.getJSONObject(pos);
 
                     official.setOfficeHolder(jOfficial.getString("name"));
 
-                    JSONArray jAddresses = jOfficial.getJSONArray("address");
-                    JSONObject jAddress = jAddresses.getJSONObject(0);
-
-                    String address="";
-
-                    if (jAddress.has("line1"))
-                        address+=jAddress.getString("line1")+'\n';
-                    if (jAddress.has("line2"))
-                        address+=jAddress.getString("line2")+'\n';
-                    if (jAddress.has("line3"))
-                        address+=jAddress.getString("line3")+'\n';
-                    if (jAddress.has("city"))
-                        address+=jAddress.getString("city")+", ";
-                    if (jAddress.has("state"))
-                        address+=jAddress.getString("state")+' ';
-                    if (jAddress.has("zip"))
-                        address+=jAddress.getString("zip");
-
-                    official.setOfficeAddress(address);
+                    if(jOfficial.has("address")) {
+                        JSONArray jAddresses = jOfficial.getJSONArray("address");
+                        JSONObject jAddress = jAddresses.getJSONObject(0);
+                        String address = "";
+                        if (jAddress.has("line1"))
+                            address += jAddress.getString("line1") + '\n';
+                        if (jAddress.has("line2"))
+                            address += jAddress.getString("line2") + '\n';
+                        if (jAddress.has("line3"))
+                            address += jAddress.getString("line3") + '\n';
+                        if (jAddress.has("city"))
+                            address += jAddress.getString("city") + ", ";
+                        if (jAddress.has("state"))
+                            address += jAddress.getString("state") + ' ';
+                        if (jAddress.has("zip"))
+                            address += jAddress.getString("zip");
+                        official.setOfficeAddress(address);
+                    }
 
                     if (jOfficial.has("party"))
                         official.setParty(jOfficial.getString("party"));
@@ -139,7 +137,7 @@ public class InformationDownloader implements Runnable{
                     }
                     if (jOfficial.has("photoUrl"))
                         official.setPhotoUrl(jOfficial.getString("photoUrl"));
-                    Log.d(TAG, "process1: " + official.toString());
+                    //Log.d(TAG, "process1: " + official.toString());
                     mainActivity.runOnUiThread(() -> mainActivity.updateOfficialList(official));
                 }
             }

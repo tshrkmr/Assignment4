@@ -12,7 +12,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 
 public class InformationDownloader implements Runnable{
 
@@ -20,6 +19,7 @@ public class InformationDownloader implements Runnable{
     private static final String DATA_URL = "https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyCi_ZZSxgVYv2yjwMcQxJsYkd2zj0NPip0&address=";
     private final MainActivity mainActivity;
     private final String searchTarget;
+
 
     public InformationDownloader(MainActivity mainActivity, String searchTarget) {
         this.mainActivity = mainActivity;
@@ -31,7 +31,7 @@ public class InformationDownloader implements Runnable{
         Uri.Builder uriBuilder = Uri.parse(DATA_URL + searchTarget).buildUpon();
         String urlToUse = uriBuilder.toString();
 
-        Log.d(TAG, "run: " + urlToUse);
+        //Log.d(TAG, "run: " + urlToUse);
 
         StringBuilder sb = new StringBuilder();
         try {
@@ -53,16 +53,12 @@ public class InformationDownloader implements Runnable{
             while ((line = reader.readLine()) != null) {
                 sb.append(line).append('\n');
             }
-
             //Log.d(TAG, "run: " + sb.toString());
-
         } catch (Exception e) {
             Log.e(TAG, "run: ", e);
             return;
         }
-
         process(sb.toString());
-        Log.d(TAG, "run: ");
     }
 
     private void process(String s){
@@ -96,6 +92,7 @@ public class InformationDownloader implements Runnable{
                         JSONArray jAddresses = jOfficial.getJSONArray("address");
                         JSONObject jAddress = jAddresses.getJSONObject(0);
                         String address = "";
+
                         if (jAddress.has("line1"))
                             address += jAddress.getString("line1") + '\n';
                         if (jAddress.has("line2"))

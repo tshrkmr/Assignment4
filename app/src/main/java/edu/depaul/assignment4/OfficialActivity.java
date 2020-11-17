@@ -111,6 +111,7 @@ public class OfficialActivity extends AppCompatActivity {
                 scrollView.setBackgroundColor(Color.BLACK);
                 logo.setVisibility(View.GONE);
                 //party.setVisibility(View.GONE);
+                party.setText(official.getParty());
                 facebook.setBackgroundColor(Color.BLACK);
                 twitter.setBackgroundColor(Color.BLACK);
                 youtube.setBackgroundColor(Color.BLACK);

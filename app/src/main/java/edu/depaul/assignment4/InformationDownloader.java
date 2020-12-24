@@ -79,10 +79,10 @@ public class InformationDownloader implements Runnable{
                 String officeName = jObj.getString("name");
                 //Log.d(TAG, "process: " + officeName);
 
-                JSONArray indicesStr = jObj.getJSONArray("officialIndices");
+                JSONArray officialIndices = jObj.getJSONArray("officialIndices");
 
-                for (int j = 0; j<indicesStr.length(); j++){
-                    int pos = Integer.parseInt(indicesStr.getString(j));
+                for (int j = 0; j<officialIndices.length(); j++){
+                    int pos = Integer.parseInt(officialIndices.getString(j));
                     Official official = new Official(officeName);
                     JSONObject jOfficial = jOfficialsArray.getJSONObject(pos);
 

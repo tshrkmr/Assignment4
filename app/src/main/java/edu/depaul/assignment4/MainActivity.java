@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                    "joe@demo.com",
 //                    socialMediaChannel);
 //            officialList.add(official);
+        //Test
 //        }
         setUpRecyclerView();
         if(!checkNetworkConnection()){
